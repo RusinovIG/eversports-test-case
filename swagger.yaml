@@ -1,0 +1,304 @@
+openapi: 3.0.0
+info:
+  title: Membership API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3099
+    description: Local development server
+paths:
+  /legacy/memberships:
+    get:
+      summary: List all memberships
+      responses:
+        '200':
+          description: A list of memberships
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    membership:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        uuid:
+                          type: string
+                        name:
+                          type: string
+                        state:
+                          type: string
+                        validFrom:
+                          type: string
+                          format: date
+                        validUntil:
+                          type: string
+                          format: date
+                        user:
+                          type: string
+                        paymentMethod:
+                          type: string
+                        recurringPrice:
+                          type: number
+                          format: float
+                        billingPeriods:
+                          type: integer
+                        billingInterval:
+                          type: string
+                    periods:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          uuid:
+                            type: string
+                          membership:
+                            type: integer
+                          start:
+                            type: string
+                            format: date
+                          end:
+                            type: string
+                            format: date
+                          state:
+                            type: string
+    post:
+      summary: Create a new membership
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                validFrom:
+                  type: string
+                  format: date
+                billingInterval:
+                  type: string
+                  enum: [monthly, yearly, weekly]
+                billingPeriods:
+                  type: integer
+                paymentMethod:
+                  type: string
+                recurringPrice:
+                  type: number
+                  format: float
+      responses:
+        '201':
+          description: Membership created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  membership:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      uuid:
+                        type: string
+                      name:
+                        type: string
+                      state:
+                        type: string
+                      validFrom:
+                        type: string
+                        format: date
+                      validUntil:
+                        type: string
+                        format: date
+                      user:
+                        type: string
+                      paymentMethod:
+                        type: string
+                      recurringPrice:
+                        type: number
+                        format: float
+                      billingPeriods:
+                        type: integer
+                      billingInterval:
+                        type: string
+                  membershipPeriods:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        uuid:
+                          type: string
+                        membership:
+                          type: integer
+                        start:
+                          type: string
+                          format: date
+                        end:
+                          type: string
+                          format: date
+                        state:
+                          type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /memberships:
+    get:
+      summary: List all memberships
+      responses:
+        '200':
+          description: A list of memberships
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    membership:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        uuid:
+                          type: string
+                        name:
+                          type: string
+                        state:
+                          type: string
+                        validFrom:
+                          type: string
+                          format: date
+                        validUntil:
+                          type: string
+                          format: date
+                        user:
+                          type: string
+                        paymentMethod:
+                          type: string
+                        recurringPrice:
+                          type: number
+                          format: float
+                        billingPeriods:
+                          type: integer
+                        billingInterval:
+                          type: string
+                    periods:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          uuid:
+                            type: string
+                          membership:
+                            type: integer
+                          start:
+                            type: string
+                            format: date
+                          end:
+                            type: string
+                            format: date
+                          state:
+                            type: string
+    post:
+      summary: Create a new membership
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                validFrom:
+                  type: string
+                  format: date
+                billingInterval:
+                  type: string
+                  enum: [monthly, yearly, weekly]
+                billingPeriods:
+                  type: integer
+                paymentMethod:
+                  type: string
+                recurringPrice:
+                  type: number
+                  format: float
+      responses:
+        '201':
+          description: Membership created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  membership:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      uuid:
+                        type: string
+                      name:
+                        type: string
+                      state:
+                        type: string
+                      validFrom:
+                        type: string
+                        format: date
+                      validUntil:
+                        type: string
+                        format: date
+                      user:
+                        type: string
+                      paymentMethod:
+                        type: string
+                      recurringPrice:
+                        type: number
+                        format: float
+                      billingPeriods:
+                        type: integer
+                      billingInterval:
+                        type: string
+                  membershipPeriods:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        uuid:
+                          type: string
+                        membership:
+                          type: integer
+                        start:
+                          type: string
+                          format: date
+                        end:
+                          type: string
+                          format: date
+                        state:
+                          type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string

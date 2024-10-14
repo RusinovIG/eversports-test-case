@@ -1,0 +1,8 @@
+tasks.md
+src/modern/routes/membership.routes.test.ts
+__snapshots__/
+node_modules/
+dist
+coverage
+.DS_Store
+.idea
